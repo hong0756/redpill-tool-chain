@@ -25,9 +25,10 @@ jobs:
         include:
           #  两行一组，删除不需要的版本
 
-
           - platform: ds918p
             version: 6.2.4-25556
+          - platform: ds918p
+            version: 7.0.1-42218
           - platform: ds918p
             version: 7.1.0-42661
 
@@ -36,7 +37,7 @@ jobs:
           - platform: ds920p
             version: 7.1.0-42661
 
-
+          
     steps:
       - name: 检出项目文件
         uses: actions/checkout@v3
@@ -77,9 +78,8 @@ jobs:
         if: matrix.platform != 'dva3221'
         run: |
           ./redpill_tool_chain.sh add https://github.com/tossp/redpill-tool-chain/raw/master/extensions/redpill-boot-wait.json
-          ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/redpill-load/develop/redpill-acpid/recipes/universal.json
-          ./redpill_tool_chain.sh add https://raw.githubusercontent.com/pocopico/redpill-load/develop/redpill-misc/recipes/universal.json
-                 
+          ./redpill_tool_chain.sh add https://github.com/tossp/redpill-tool-chain/raw/master/extensions/redpill-acpid.json
+          ./redpill_tool_chain.sh add https://github.com/tossp/redpill-tool-chain/raw/master/extensions/redpill-virtio.json
       - name: 添加扩展驱动[dva3221]
         if: matrix.platform == 'dva3221'
         run: |
